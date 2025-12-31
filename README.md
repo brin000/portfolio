@@ -57,7 +57,7 @@ You can start editing the page by modifying `app/page.tsx`. The page auto-update
 ### Milestone 4: Basic styling + components
 
 - Add layout + typography + spacing (mobile-friendly)
-- Create 2–3 tiny components only if needed (e.g., Container, Nav, Card)
+- Create 2–3 tiny components only if needed (e.g., Container, Nav, Card) . dependencies shadcn
 - **Test**: looks good on mobile/desktop, no layout breaks.
 
 ### Milestone 5: SEO + deploy-ready
@@ -66,6 +66,8 @@ You can start editing the page by modifying `app/page.tsx`. The page auto-update
 - Sitemap/robots only if trivial
 - Build passes
 - **Test**: `next build` succeeds, Lighthouse basic check OK.
+
+### Milestone 6: 
 
 ## Vibe anchor
 

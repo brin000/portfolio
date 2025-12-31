@@ -1,5 +1,6 @@
 @import "tailwindcss";
 @import "tw-animate-css";
+@plugin "@tailwindcss/typography";
 
 @custom-variant dark (&:is(.dark *));
 
@@ -48,6 +49,7 @@
 
 :root {
   --radius: 0.625rem;
+  --header-height: 3.5rem; /* 56px (h-14) */
   --background: oklch(1 0 0);
   --foreground: oklch(0.145 0 0);
   --card: oklch(1 0 0);
@@ -115,6 +117,12 @@
   --sidebar-ring: oklch(0.556 0 0);
 }
 
+@media (min-width: 768px) {
+  :root {
+    --header-height: 4rem; /* 64px (h-16) */
+  }
+}
+
 @layer base {
   * {
     @apply border-border outline-ring/50;
@@ -122,4 +130,59 @@
   body {
     @apply bg-background text-foreground;
   }
+}
+
+/* rehype-pretty-code 样式 */
+pre {
+  @apply overflow-x-auto p-4 rounded-lg bg-muted;
+}
+
+pre [data-line] {
+  @apply px-4;
+}
+
+/* 深色/浅色模式支持 */
+code[data-theme*=" "],
+code[data-theme*=" "] span {
+  color: var(--shiki-light);
+  background-color: var(--shiki-light-bg);
+}
+
+.dark code[data-theme*=" "],
+.dark code[data-theme*=" "] span {
+  color: var(--shiki-dark);
+  background-color: var(--shiki-dark-bg);
+}
+
+/* 行号样式 */
+code[data-line-numbers] {
+  counter-reset: line;
+}
+
+code[data-line-numbers] > [data-line]::before {
+  counter-increment: line;
+  content: counter(line);
+  @apply inline-block w-8 mr-4 text-right text-muted-foreground;
+}
+
+code[data-line-numbers-max-digits="2"] > [data-line]::before {
+  @apply w-10;
+}
+
+code[data-line-numbers-max-digits="3"] > [data-line]::before {
+  @apply w-12;
+}
+
+code[data-line-numbers-max-digits="4"] > [data-line]::before {
+  @apply w-14;
+}
+
+/* 高亮行样式 */
+[data-highlighted-line] {
+  @apply bg-muted/50;
+}
+
+/* 高亮字符样式 */
+[data-highlighted-chars] {
+  @apply bg-primary/20 rounded px-1;
 }
