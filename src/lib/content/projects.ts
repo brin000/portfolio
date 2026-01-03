@@ -16,7 +16,7 @@ export const projects: Project[] = [
     tags: ["React", "Next.js", "TypeScript", "Portfolio"],
     links: {
       github: "https://github.com/brin000/portfolio",
-      website: "portfolio-brin000s-projects.vercel.app",
+      website: "https://portfolio-brin000s-projects.vercel.app",
     },
   },
 ];
