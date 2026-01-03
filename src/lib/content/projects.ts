@@ -11,12 +11,12 @@ export interface Project {
 
 export const projects: Project[] = [
   {
-    title: "项目示例 1",
-    description: "这是一个示例项目，展示了如何使用 React 和 Next.js 构建现代化的 Web 应用。",
-    tags: ["React", "Next.js", "TypeScript"],
+    title: "个人作品集网站",
+    description: "我的个人作品集网站，展示了我的项目、博客和个人信息。基于 React、Next.js 和 TypeScript 开发，支持内容管理和现代前端最佳实践。",
+    tags: ["React", "Next.js", "TypeScript", "Portfolio"],
     links: {
-      github: "https://github.com/example/project1",
-      demo: "https://demo.example.com/project1",
+      github: "https://github.com/brin000/portfolio",
+      website: "portfolio-brin000s-projects.vercel.app",
     },
   },
 ];
