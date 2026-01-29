@@ -8,17 +8,21 @@ interface ContainerProps<T extends ContainerElement = "div">
   as?: T;
 }
 
+const contentColumnStyle = {
+  maxWidth: "var(--content-max-width)",
+  paddingLeft: "var(--content-padding-x)",
+  paddingRight: "var(--content-padding-x)",
+} as const;
+
 const Container = React.forwardRef<
   HTMLElement,
   ContainerProps<ContainerElement>
->(({ className, as: Component = "div", ...props }, ref) => {
+>(({ className, style, as: Component = "div", ...props }, ref) => {
   return (
     <Component
       ref={ref as any}
-      className={cn(
-        "mx-auto max-w-3xl px-4 py-12 md:py-16",
-        className
-      )}
+      className={cn("mx-auto py-12 md:py-16", className)}
+      style={{ ...contentColumnStyle, ...style }}
       {...props}
     />
   );

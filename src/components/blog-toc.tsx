@@ -111,7 +111,9 @@ export function BlogTOC({ toc }: BlogTOCProps) {
       className="sticky top-[calc(var(--header-height)+1px)] hidden h-[calc(100svh-var(--header-height))] overflow-y-auto xl:block"
     >
       <div className="space-y-2">
-        <p className="font-medium text-sm mb-4">On This Page</p>
+        <p className="mb-4 text-xs font-medium uppercase tracking-widest text-muted-foreground/80">
+          本页目录
+        </p>
         <Tree tree={toc} activeItem={activeHeading} />
       </div>
     </nav>

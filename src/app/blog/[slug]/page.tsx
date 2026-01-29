@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getPostBySlug, getAllPosts } from "@/lib/content/blog";
-import { format } from "date-fns";
+import { formatDateInTimeZone } from "@/lib/date";
 import { ArrowLeft } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Container from "@/components/container";
@@ -71,43 +71,56 @@ export default async function BlogPost({
       <KatexStyles />
       <div className="flex items-stretch">
         <div className="flex min-w-0 flex-1 flex-col">
-          <Container as="main">
-          <div className="flex flex-col gap-6 md:gap-8">
-            <Button variant="ghost" size="sm" asChild className="w-fit">
-              <Link href="/blog" className="flex items-center gap-2">
-                <ArrowLeft className="size-4" />
-                返回博客列表
-              </Link>
-            </Button>
+          <Container as="main" className="relative">
+            <div
+              className="pointer-events-none absolute inset-0 -top-24 h-[50vh] max-h-[400px] opacity-20 dark:opacity-8"
+              aria-hidden
+              style={{
+                background:
+                  "radial-gradient(ellipse 80% 70% at 50% -20%, var(--primary) / 0.15, transparent)",
+              }}
+            />
+            <div className="relative flex flex-col gap-8 md:gap-10">
+              <Button
+                variant="ghost"
+                size="sm"
+                asChild
+                className="group w-fit text-muted-foreground transition-colors hover:text-foreground"
+              >
+                <Link href="/blog" className="flex items-center gap-2">
+                  <ArrowLeft className="size-4 transition-transform duration-200 group-hover:-translate-x-0.5" />
+                  返回博客列表
+                </Link>
+              </Button>
 
-            <article className="flex flex-col gap-4 md:gap-6">
-              <header className="flex flex-col gap-2">
-                <h1 className="text-3xl font-semibold tracking-tight md:text-4xl">
-                  {post.title}
-                </h1>
-                <time
-                  dateTime={post.date}
-                  className="text-sm text-muted-foreground"
-                >
-                  {format(new Date(post.date), "yyyy年MM月dd日")}
-                </time>
-              </header>
+              <article className="flex flex-col gap-6 md:gap-8">
+                <header className="flex flex-col gap-2 border-l-0 pl-0 md:border-l-2 md:border-l-foreground/10 md:pl-8 md:dark:border-l-foreground/15">
+                  <h1 className="font-(--font-display) text-3xl font-semibold tracking-tight text-foreground md:text-4xl md:leading-tight">
+                    {post.title}
+                  </h1>
+                  <time
+                    dateTime={post.date}
+                    className="text-sm text-muted-foreground"
+                  >
+                    {formatDateInTimeZone(post.date, "yyyy年MM月dd日", "UTC")}
+                  </time>
+                </header>
 
-              <div
-                className="prose prose-sm dark:prose-invert max-w-none"
-                dangerouslySetInnerHTML={{ __html: processedContent }}
-              />
-            </article>
-          </div>
-        </Container>
-      </div>
-      {toc.items.length > 0 && (
-        <div className="sticky top-[calc(var(--header-height)+1px)] z-30 ml-auto hidden h-[calc(100svh-var(--header-height))] w-72 flex-col gap-4 overflow-hidden overscroll-none pb-8 xl:flex">
-          <div className="px-6">
-            <BlogTOC toc={toc} />
-          </div>
+                <div
+                  className="prose prose-sm dark:prose-invert max-w-none prose-headings:font-(--font-display) prose-headings:tracking-tight"
+                  dangerouslySetInnerHTML={{ __html: processedContent }}
+                />
+              </article>
+            </div>
+          </Container>
         </div>
-      )}
+        {toc.items.length > 0 && (
+          <div className="sticky top-[calc(var(--header-height)+1px)] z-30 ml-auto hidden h-[calc(100svh-var(--header-height))] w-72 flex-col gap-4 overflow-hidden overscroll-none pb-8 xl:flex">
+            <div className="px-6">
+              <BlogTOC toc={toc} />
+            </div>
+          </div>
+        )}
       </div>
     </>
   );
