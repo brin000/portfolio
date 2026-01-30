@@ -8,6 +8,7 @@ import { cn } from "@/lib/utils";
 
 const navItems = [
   { href: "/", label: "主页" },
+  { href: "/resume", label: "简历" },
   { href: "/projects", label: "项目" },
   { href: "/blog", label: "博客" },
   { href: "/guestbook", label: "留言板" },
@@ -50,7 +51,7 @@ export default function SiteHeader() {
   return (
     <header
       className={cn(
-        "fixed left-0 right-0 top-0 z-50 transition-transform duration-300 ease-out",
+        "site-header fixed left-0 right-0 top-0 z-50 transition-transform duration-300 ease-out",
         visible ? "translate-y-0" : "-translate-y-full"
       )}
       style={{ willChange: "transform" }}

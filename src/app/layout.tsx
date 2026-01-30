@@ -43,7 +43,7 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           <SiteHeader />
-          <div style={{ paddingTop: "var(--header-height)" }}>{children}</div>
+          <div className="main-wrap" style={{ paddingTop: "var(--header-height)" }}>{children}</div>
         </ThemeProvider>
       </body>
     </html>

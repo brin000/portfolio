@@ -19,6 +19,34 @@ export interface GuestbookMessage {
   createdAt: string;
 }
 
+/** 无本地留言时展示的模拟留言，让留言板更丰富 */
+const SEED_MESSAGES: GuestbookMessage[] = [
+  {
+    id: "seed-1",
+    name: "路人甲",
+    content: "路过，博客和简历都写得挺干净，前端这块确实有料。",
+    createdAt: new Date(Date.now() - 5 * 24 * 60 * 60 * 1000).toISOString(),
+  },
+  {
+    id: "seed-2",
+    name: "小陈",
+    content: "看了你的 React Server Components 那篇，讲得很清楚，收藏了。",
+    createdAt: new Date(Date.now() - 4 * 24 * 60 * 60 * 1000).toISOString(),
+  },
+  {
+    id: "seed-3",
+    name: "匿名",
+    content: "你好呀，想问问 Next.js 和 Nuxt 在实际项目里你更倾向用哪个？",
+    createdAt: new Date(Date.now() - 3 * 24 * 60 * 60 * 1000).toISOString(),
+  },
+  {
+    id: "seed-4",
+    name: "阿杰",
+    content: "简历里的 SSR 和 BFF 实践很实在，我们团队也在搞类似的东西，有机会交流下。",
+    createdAt: new Date(Date.now() - 2 * 24 * 60 * 60 * 1000).toISOString(),
+  }
+];
+
 function loadMessages(): GuestbookMessage[] {
   if (typeof window === "undefined") return [];
   try {
@@ -48,7 +76,13 @@ export default function GuestbookPage() {
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
-    setMessages(loadMessages());
+    const stored = loadMessages();
+    if (stored.length === 0) {
+      saveMessages(SEED_MESSAGES);
+      setMessages(SEED_MESSAGES);
+    } else {
+      setMessages(stored);
+    }
     setMounted(true);
   }, []);
 
